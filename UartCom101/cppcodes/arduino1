@@ -1,0 +1,20 @@
+//receiver's code
+
+
+#define servopin A0
+#define ledpin A1
+byte deger[2];
+
+void setup()
+{
+  Serial.begin(9600);
+}
+
+void loop()
+{
+  int servovalue= map(analogRead(servopin),0,1023,0,180);
+  deger[0]= servovalue;
+  int pinvalue= map(analogRead(ledpin),0,1023,0,255);
+  deger[1]=pinvalue;
+  int bytes=Serial.write(deger,2);//2 bit uzunluğunda buffer gönderildi.
+}
