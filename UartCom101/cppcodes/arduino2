@@ -1,0 +1,26 @@
+//transmitter's code
+
+#include <Servo.h>
+int angle,brightness;
+byte deger[2];
+
+Servo servo_9;
+
+void setup()
+{
+  Serial.begin(9600);
+  servo_9.attach(9, 500, 2500);
+  pinMode(8,OUTPUT);
+  
+}
+
+void loop()
+{
+  int bytes= Serial.readBytes(deger,2);
+  angle= deger[0];
+  brightness= deger[1];
+  
+  servo_9.write(angle);
+  analogWrite(8,deger[1]);
+  
+}
