@@ -1,0 +1,51 @@
+#include <Servo.h>
+#include <Wire.h>
+
+int angle,brightness;
+byte deger[2];
+
+Servo servo_9;
+
+void setup()
+{
+  Serial.begin(9600);
+  servo_9.attach(9, 500, 2500);
+  pinMode(8,OUTPUT);
+  Wire.begin(1);
+  Wire.onRequest(requestEvent);//birinci arduinoya geri veri gönderirsek.
+  Wire.onReceive(receiveEvent);
+}
+
+void loop()
+{
+  
+  delay(100);
+  
+}
+
+
+void receiveEvent(int bit){
+  while (Wire.available()){
+  Wire.readBytes(deger,2);
+  Serial.print(deger[0]);
+  Serial.print('-');
+  Serial.print(deger[1]);
+  Serial.print('-');
+
+    
+  angle= deger[0];
+  brightness= deger[1];
+  servo_9.write(angle);
+  analogWrite(8,deger[1]);
+  }}
+
+void requestEvent(){
+  Wire.write("values available.");
+}
+
+
+
+
+
+
+
