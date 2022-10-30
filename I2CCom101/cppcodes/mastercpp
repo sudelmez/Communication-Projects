@@ -1,0 +1,34 @@
+#define servopin A0
+#define ledpin A1
+#include <Wire.h> //i2c için kullandık.
+
+byte deger[2];
+char c;
+
+void setup()
+{
+  Wire.begin();
+  Serial.begin(9600);
+
+}
+
+void loop()
+{ 
+  Wire.requestFrom(1, 16);
+
+  Wire.beginTransmission(1);
+  int servovalue= map(analogRead(servopin),0,1023,0,180);
+  deger[0]= servovalue;
+  int pinvalue= map(analogRead(ledpin),0,1023,0,255);
+  deger[1]=pinvalue;
+  Wire.write(deger,2); 
+ 
+  while(Wire.available()){
+    c = Wire.read();
+    Serial.print(c);
+  }
+    Serial.println();
+
+    Wire.endTransmission(11);
+
+}
