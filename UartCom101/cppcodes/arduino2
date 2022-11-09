@@ -1,4 +1,4 @@
-//transmitter's code
+//receiver's code
 
 #include <Servo.h>
 int angle,brightness;
