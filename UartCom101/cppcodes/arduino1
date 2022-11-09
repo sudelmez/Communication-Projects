@@ -1,4 +1,4 @@
-//receiver's code
+//transmitter's code
 
 
 #define servopin A0
@@ -16,5 +16,5 @@ void loop()
   deger[0]= servovalue;
   int pinvalue= map(analogRead(ledpin),0,1023,0,255);
   deger[1]=pinvalue;
-  int bytes=Serial.write(deger,2);//2 bit uzunluğunda buffer gönderildi.
+  int bytes=Serial.write(deger,2);
 }
