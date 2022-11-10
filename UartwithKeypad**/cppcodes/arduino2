@@ -1,0 +1,29 @@
+
+void setup()
+{
+  pinMode(9, OUTPUT);
+  Serial.begin(9600);
+}
+
+int sifre[]={1,2,3,4};
+int gelen[4];
+int g=0;
+int hata=0;
+
+void loop()
+{
+  
+  if(Serial.available()&&(g<=4)){
+    gelen[g]= Serial.read()-48;
+    Serial.println(gelen[g]);
+    g++;
+  }
+  
+  for(int i=0;i<4;i++){
+    if(sifre[i]!=gelen[i]) hata++;
+  }
+ Serial.println(hata);
+  if(hata==0) digitalWrite(9,HIGH);
+  
+  
+}
